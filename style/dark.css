@@ -10,6 +10,7 @@ QWidget#div {
 
 QDialog {
     background-color: #202020;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 QLabel {
@@ -28,9 +29,14 @@ QPushButton {
     height: 32px;
 }
 
-QPushButton:hover {
-    background-color: #3c3c3c;
+QPushButton:hover { background-color: #3c3c3c; }
+
+QPushButton#highlight { 
+    background-color: #6fc4d5; 
+    color: black; 
 }
+
+QPushButton#highlight:hover { background-color: #66b3c2; }
 
 QListWidget {
     color: #e0e0e0;
@@ -46,13 +52,9 @@ QListWidget::item {
     padding-left: 43px;
 }
 
-QListWidget::item::selected {
-    background-color: #292929;
-}
+QListWidget::item::selected { background-color: #292929; }
 
-QListWidget::item:hover {
-    background-color: #2d2d2d;
-}
+QListWidget::item:hover { background-color: #2d2d2d; }
 
 QComboBox {
     color: #e0e0e0;

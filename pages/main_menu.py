@@ -13,6 +13,8 @@ class MainMenu(QWidget):
         self.vLayout.addWidget(QLabel("School manager"))
 
         self.button_timetable = QPushButton("timetable")
+        self.button_timetable.setObjectName("highlight")
+
         self.button_settings = QPushButton("settings")
 
         self.hLayout.addWidget(self.button_timetable)
