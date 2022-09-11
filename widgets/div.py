@@ -1,8 +1,6 @@
 from PyQt6.QtWidgets import (
     QWidget, 
-    QVBoxLayout, 
-    QHBoxLayout, 
-    QScrollArea
+    QHBoxLayout
 )
 
 
@@ -11,3 +9,10 @@ class Div(QWidget):
         super().__init__()
 
         self.setObjectName("div") # css ident 
+
+        self.layout = QHBoxLayout(self)
+
+        self.setLayout(self.layout)
+
+    def addWidget(self, widget: QWidget) -> None:
+        self.layout.addWidget(widget)
