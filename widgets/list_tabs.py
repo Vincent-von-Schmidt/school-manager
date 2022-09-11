@@ -1,4 +1,3 @@
-from typing import overload
 from PyQt6.QtWidgets import (
     QWidget, 
     QStackedWidget, 
