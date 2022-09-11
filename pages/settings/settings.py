@@ -3,6 +3,8 @@ from PyQt6.QtWidgets import (
     QVBoxLayout, 
     QPushButton
 )
+from PyQt6.QtGui import QIcon
+
 import pages.settings.general
 import pages.settings.language
 import pages.settings.preferences
@@ -18,7 +20,7 @@ class Settings(QWidget):
         self.layout = QVBoxLayout(self)
 
         self.list = widgets.list_tabs.ListTabs()
-        self.list.addWidget("general", pages.settings.general.General())
+        self.list.addWidget("general", pages.settings.general.General(), QIcon("assets/settings.ico"))
         self.list.addWidget("preferences", pages.settings.preferences.Preferences())
         self.list.addWidget("timetable", pages.settings.timetable.Timetable())
         self.list.addWidget("language", pages.settings.language.Language())

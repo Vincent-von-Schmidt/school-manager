@@ -26,7 +26,7 @@ QLabel#headline {
 QPushButton {
     color: #e0e0e0;
     background-color: #373737;
-    border: 0px sold #373737;
+    border: 4px sold #202020;
     border-radius: 4px;
     height: 32px;
 }
