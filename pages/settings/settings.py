@@ -1,8 +1,5 @@
 from PyQt6.QtWidgets import (
     QWidget, 
-    QStackedWidget, 
-    QHBoxLayout,
-    QListWidget, 
     QVBoxLayout, 
     QPushButton
 )
@@ -11,40 +8,24 @@ import pages.settings.language
 import pages.settings.preferences
 import pages.settings.timetable
 
+import widgets.list_tabs
+
 
 class Settings(QWidget):
     def __init__(self) -> None:
         super().__init__()
 
-        self.vLayout = QVBoxLayout(self)
-        self.hLayout = QHBoxLayout(self)
-        self.stack = QStackedWidget(self)
+        self.layout = QVBoxLayout(self)
+        self.list = widgets.list_tabs.ListTabs()
 
-        self.list = QListWidget()
-        self.list.insertItem(0, "general")
-        self.list.insertItem(1, "preferences")
-        self.list.insertItem(2, "timetable")
-        self.list.insertItem(3, "language")
+        self.list.addWidget("general", pages.settings.general.General())
+        self.list.addWidget("preferences", pages.settings.preferences.Preferences())
+        self.list.addWidget("timetable", pages.settings.timetable.Timetable())
+        self.list.addWidget("language", pages.settings.language.Language())
 
-        self.hLayout.addWidget(self.list, 0)
-        
-        self.general = pages.settings.general.General()
-        self.preferences = pages.settings.preferences.Preferences()
-        self.timetable = pages.settings.timetable.Timetable()
-        self.language = pages.settings.language.Language()
-
-        self.stack.addWidget(self.general)
-        self.stack.addWidget(self.preferences)
-        self.stack.addWidget(self.timetable)
-        self.stack.addWidget(self.language)
-
-        self.hLayout.addWidget(self.stack, 1)
-
-        self.list.currentRowChanged.connect(self.stack.setCurrentIndex)
-
-        self.vLayout.addLayout(self.hLayout)
+        self.layout.addWidget(self.list)
 
         self.button = QPushButton("back to main menu")
-        self.vLayout.addWidget(self.button)
+        self.layout.addWidget(self.button)
 
-        self.setLayout(self.vLayout)
+        self.setLayout(self.layout)
