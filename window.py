@@ -33,5 +33,5 @@ class Window(QWidget):
         # layout config
         self.layout.addWidget(self.stack)
         self.setLayout(self.layout)
-        self.resize(1280, 720)
+        self.resize(600, 300)
         self.show()

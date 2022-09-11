@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel, QPushButton
+    QWidget, QVBoxLayout, QLabel, QComboBox
 )
 
 
@@ -9,6 +9,12 @@ class Preferences(QWidget):
 
         self.layout = QVBoxLayout(self)
 
-        self.layout.addWidget(QLabel("preferences"))
+        self.layout.addWidget(QLabel("color mode"))
+
+        self.light_dark_switcher = QComboBox()
+        self.light_dark_switcher.addItem("light")
+        self.light_dark_switcher.addItem("dark")
+
+        self.layout.addWidget(self.light_dark_switcher)
 
         self.setLayout(self.layout)
