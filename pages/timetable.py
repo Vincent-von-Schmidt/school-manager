@@ -10,7 +10,7 @@ class Timetable(QWidget):
         self.layout = QVBoxLayout(self)
 
         self.layout.addWidget(headline := QLabel("timetable"))
-        headline.setObjectName("headline") # stylesheet link
+        headline.setObjectName("headline") # css ident
 
         self.table = QTableWidget(10, 6, self)
 
