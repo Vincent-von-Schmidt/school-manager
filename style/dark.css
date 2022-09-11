@@ -4,12 +4,14 @@ QWidget {
 
 QWidget#div {
     background-color: #2b2b2b;
-    border: 0px solid #2b2b2b;
+    border: 10px solid #2b2b2b;
     border-radius: 4px;
 }
 
 QDialog {
     background-color: #202020;
+    border: 0px solid #202020;
+    border-radius: 8px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
