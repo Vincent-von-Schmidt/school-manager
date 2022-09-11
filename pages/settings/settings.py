@@ -16,8 +16,8 @@ class Settings(QWidget):
         super().__init__()
 
         self.layout = QVBoxLayout(self)
-        self.list = widgets.list_tabs.ListTabs()
 
+        self.list = widgets.list_tabs.ListTabs()
         self.list.addWidget("general", pages.settings.general.General())
         self.list.addWidget("preferences", pages.settings.preferences.Preferences())
         self.list.addWidget("timetable", pages.settings.timetable.Timetable())
