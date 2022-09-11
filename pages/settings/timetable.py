@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QLabel, QPushButton
 )
+import widgets.div
 
 
 class Timetable(QWidget):
@@ -9,6 +10,9 @@ class Timetable(QWidget):
 
         self.layout = QVBoxLayout(self)
 
-        self.layout.addWidget(QLabel("timetable"))
+        self.div = widgets.div.Div()
+        self.div.addWidget(QLabel("Hello World"))
+
+        self.layout.addWidget(self.div)
 
         self.setLayout(self.layout)
