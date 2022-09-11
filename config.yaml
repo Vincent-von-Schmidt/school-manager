@@ -1,0 +1,12 @@
+settings:
+
+  general:
+    test: true
+
+  preferences:
+    color_mode: "light"
+
+  timetable:
+    test: true
+
+  language: "English"
