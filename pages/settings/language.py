@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel, QPushButton
+    QWidget, QVBoxLayout, QLabel, QComboBox
 )
 
 
@@ -10,5 +10,11 @@ class Language(QWidget):
         self.layout = QVBoxLayout(self)
 
         self.layout.addWidget(QLabel("language"))
+
+        self.lang_switcher = QComboBox(self)
+        self.lang_switcher.addItem("English")
+        self.lang_switcher.addItem("German")
+
+        self.layout.addWidget(self.lang_switcher)
 
         self.setLayout(self.layout)
