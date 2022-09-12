@@ -2,9 +2,15 @@
 
 ### buid and run
 
+With custom Python installation: 
+```sh
+python3 -m pip install pyqt6
+python3 main.py
+```
+
 No Python installation needed. 
 
-for Debian based systems: 
+for Debian based systems (!!!currently not working for ssh clients!!!): 
 ```sh
 ./run.sh
 ```
