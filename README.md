@@ -1,14 +1,14 @@
 # school-manager
 
-### buid and run
+## buid and run
 
-With custom Python installation: 
+### With custom Python installation: 
 ```sh
 python3 -m pip install pyqt6
 python3 main.py
 ```
 
-No Python installation needed. 
+### Without Python installation: 
 
 for Debian based systems (!!!currently not working for ssh clients!!!): 
 ```sh
