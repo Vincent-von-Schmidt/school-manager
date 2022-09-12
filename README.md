@@ -4,7 +4,7 @@
 
 ### With custom Python installation: 
 ```sh
-python3 -m pip install pyqt6
+python3 -m pip install -r requirements.txt
 python3 main.py
 ```
 
