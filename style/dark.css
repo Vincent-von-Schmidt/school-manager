@@ -47,6 +47,11 @@ QListWidget {
     border-radius: 20px;
 }
 
+QListWidgetItem {
+    margin: 5px;
+    padding-left: 10px;
+}
+
 QListWidget::item {
     border: 2px solid #202020;
     border-radius: 8px;
