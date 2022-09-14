@@ -10,7 +10,7 @@ python3 main.py
 
 ### Without Python installation: 
 
-for Debian based systems (!!!currently not working for ssh clients!!!): 
+for Debian based systems (X11-forwarding currently not supported): 
 ```sh
 ./run.sh
 ```
