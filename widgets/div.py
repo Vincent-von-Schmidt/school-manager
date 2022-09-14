@@ -9,6 +9,7 @@ class Div(QWidget):
         super().__init__()
 
         self.setObjectName("div") # css ident 
+        self.setStyleSheet("QWidget {background-color: white;}")
 
         self.layout = QHBoxLayout(self)
 
