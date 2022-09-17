@@ -11,6 +11,7 @@ class Timetable(QWidget):
         self.layout = QVBoxLayout(self)
 
         self.div = widgets.div.Div()
+
         self.div.addWidget(QLabel("Hello World"))
 
         self.layout.addWidget(self.div)
