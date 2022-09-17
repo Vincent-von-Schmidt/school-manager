@@ -1,9 +1,9 @@
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel, QComboBox
+    QWidget, QVBoxLayout, QLabel, QComboBox, QFrame
 )
 
 
-class Language(QWidget):
+class Language(QFrame):
     def __init__(self) -> None:
         super().__init__()
 

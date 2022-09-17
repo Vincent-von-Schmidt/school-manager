@@ -1,9 +1,9 @@
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel, QPushButton, QHBoxLayout
+    QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QFrame
 )
 
 
-class MainMenu(QWidget):
+class MainMenu(QFrame):
     def __init__(self) -> None:
         super().__init__()
 
@@ -21,5 +21,5 @@ class MainMenu(QWidget):
         self.hLayout.addWidget(self.button_settings) 
 
         self.vLayout.addLayout(self.hLayout)
-
+        
         self.setLayout(self.vLayout)

@@ -1,11 +1,11 @@
 from PyQt6.QtWidgets import (
-    QWidget, QStackedWidget, QVBoxLayout
+    QStackedWidget, QVBoxLayout, QFrame
 )
 import pages.main_menu
 import pages.timetable
 import pages.settings.settings
 
-class Window(QWidget):
+class Window(QFrame):
     def __init__(self) -> None:
         super().__init__()
 

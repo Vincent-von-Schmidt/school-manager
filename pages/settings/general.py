@@ -1,9 +1,9 @@
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel, QPushButton
+    QWidget, QVBoxLayout, QLabel, QPushButton, QFrame
 )
 
 
-class General(QWidget):
+class General(QFrame):
     def __init__(self) -> None:
         super().__init__()
 

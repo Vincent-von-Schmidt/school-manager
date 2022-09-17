@@ -1,14 +1,13 @@
 from PyQt6.QtWidgets import (
     QWidget, 
-    QHBoxLayout
+    QHBoxLayout,
+    QFrame
 )
 
-
-class Div(QWidget):
+class Div(QFrame):
     def __init__(self) -> None:
         super().__init__()
 
-        # self.setStyleSheet("QWidget {background-color: white;}")
         self.layout = QHBoxLayout(self)
 
         self.setLayout(self.layout)

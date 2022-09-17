@@ -1,10 +1,10 @@
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel, QPushButton
+    QWidget, QVBoxLayout, QLabel, QPushButton, QFrame
 )
 import widgets.div
 
 
-class Timetable(QWidget):
+class Timetable(QFrame):
     def __init__(self) -> None:
         super().__init__()
 

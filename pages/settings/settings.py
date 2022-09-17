@@ -1,7 +1,8 @@
 from PyQt6.QtWidgets import (
     QWidget, 
     QVBoxLayout, 
-    QPushButton
+    QPushButton,
+    QFrame
 )
 from PyQt6.QtGui import QIcon
 
@@ -13,7 +14,7 @@ import pages.settings.timetable
 import widgets.list_tabs
 
 
-class Settings(QWidget):
+class Settings(QFrame):
     def __init__(self) -> None:
         super().__init__()
 
