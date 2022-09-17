@@ -1,11 +1,15 @@
 QFrame {
     background-color: #202020;
-    border: 1px dotted white;
+    border: 1px dotted red;
     margin-left: 3px;
     margin-right: 36px;
     margin-top: 45px;
     margin-bottom: 19px;
 }
+
+Window > QFrame { border: 1px dotted green; }
+
+MainMenu > QFrame { border: 1px dotted blue; }
 
 Div > QFrame {
     background-color: #2b2b2b;
