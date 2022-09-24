@@ -5,6 +5,7 @@ import pages.main_menu
 import pages.timetable
 import pages.settings.settings
 
+
 class Window(QFrame):
     def __init__(self) -> None:
         super().__init__()

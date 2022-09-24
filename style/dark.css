@@ -3,13 +3,18 @@ QFrame {
     border: 1px dotted red;
     margin-left: 3px;
     margin-right: 36px;
-    margin-top: 45px;
+    margin-top: 3px;
     margin-bottom: 19px;
+    padding: 0px;
 }
 
-Window > QFrame { border: 1px dotted green; }
+QApplication { padding: 0px; }
 
-MainMenu > QFrame { border: 1px dotted blue; }
+Window > QFrame { border: 3px dotted green; margin: 0px; }
+
+MainMenu > QFrame { border: 1px dotted blue; margin: 0px; }
+
+QStackedWidget > QFrame { border: 1px dotted yellow; margin: 0px; }
 
 Div > QFrame {
     background-color: #2b2b2b;
