@@ -1,3 +1,5 @@
 PyQt6
 pyjson
 pyyaml
+tabulate
+psycopg2-binary
