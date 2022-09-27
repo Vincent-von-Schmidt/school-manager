@@ -16,3 +16,6 @@ for Debian based systems (X11-forwarding currently not supported):
 ```
 
 Arch, Fedora and Windows support will be added in the future. 
+
+## data infrastructer
+Postgresql will be used as the databaseservice. EXPERIMENTAL!!!
