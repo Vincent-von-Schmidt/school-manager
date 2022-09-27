@@ -1,4 +1,5 @@
 import psycopg2
+import tabulate
 
 connection = psycopg2.connect(
     host="192.168.178.23",
@@ -31,4 +32,4 @@ ORDER BY timetable.id ASC;
 
 """)
 
-print(cursor.fetchall())
+print(tabulate.tabulate(cursor.fetchall()))
