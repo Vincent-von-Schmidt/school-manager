@@ -1,6 +1,6 @@
 # school-manager
 
-## buid and run
+## build and run
 
 ### With custom Python installation: 
 ```sh

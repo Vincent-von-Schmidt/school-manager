@@ -3,3 +3,5 @@ pages/__pycache__/
 settings/__pycache__/
 __pycache__/
 *.pyc
+venv/
+.idea
