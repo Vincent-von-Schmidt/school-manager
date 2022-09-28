@@ -1,9 +1,9 @@
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel, QPushButton, QTableWidget, QTableWidgetItem
+    QFrame, QVBoxLayout, QLabel, QPushButton, QTableWidget, QTableWidgetItem
 )
 import psycopg2
 
-class Timetable(QWidget):
+class Timetable(QFrame):
     def __init__(self) -> None:
         super().__init__()
 
@@ -42,12 +42,18 @@ class Timetable(QWidget):
         self.layout.addWidget(headline := QLabel("timetable"))
         headline.setObjectName("headline") # css ident
 
-        self.table = QTableWidget(10, 7, self)
+        self.table = QTableWidget(34, 6, self)
 
-        count = 1
+        # set header
+        count = 0
         for x in cursor.description:
             self.table.setItem(0, count, QTableWidgetItem(x[0]))
             count += 1
+
+        # set content
+        for fetch_index, fetch in enumerate(cursor.fetchall()):
+            for content_index, content in enumerate(fetch):
+                self.table.setItem(fetch_index + 1, content_index, QTableWidgetItem(content))
 
         self.layout.addWidget(self.table)
 
