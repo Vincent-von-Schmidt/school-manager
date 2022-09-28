@@ -31,4 +31,4 @@ ORDER BY timetable.id ASC;
 
 """)
 
-print(tabulate.tabulate(cursor.fetchall()))
+print(tabulate.tabulate(cursor.fetchall(), headers=[x[0] for x in cursor.description]))
