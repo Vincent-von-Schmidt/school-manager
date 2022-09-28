@@ -83,3 +83,7 @@ QListWidget::item:hover { background-color: #2d2d2d; }
 QComboBox {
     color: #e0e0e0;
 }
+
+QTableWidget {
+    color: white;
+}
