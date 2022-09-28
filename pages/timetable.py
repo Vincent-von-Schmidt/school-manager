@@ -55,6 +55,7 @@ class Timetable(QFrame):
 
         # set content
         # index as cordinates -> fetch_index = y, content_index = x
+        # fetch_index + 1 -> 0 = header
         for fetch_index, fetch in enumerate(cursor.fetchall()):
             for content_index, content in enumerate(fetch):
                 self.table.setItem(fetch_index + 1, content_index, QTableWidgetItem(content))
