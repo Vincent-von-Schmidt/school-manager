@@ -11,6 +11,17 @@ connection = psycopg2.connect(
 
 cursor = connection.cursor()
 
+cursor.execute("SELECT * FROM times;")
+times = cursor.fetchall()
+
+cursor.execute("SELECT day.name FROM day;")
+weekdays = cursor.fetchall()
+
+timetable = []
+
+for hour in times:
+	timetable.append((hour[0]))
+
 cursor.execute("""
 
 SELECT 
@@ -31,4 +42,7 @@ ORDER BY timetable.id ASC;
 
 """)
 
-print(tabulate.tabulate(cursor.fetchall(), headers=[x[0] for x in cursor.description], tablefmt="pretty"))
+print(tabulate.tabulate(fetch := cursor.fetchall(), headers=[x[0] for x in cursor.description], tablefmt="pretty"))
+print(fetch)
+
+print(tabulate.tabulate(timetable, headers=[x[0] for x in weekdays], tablefmt="pretty"))
