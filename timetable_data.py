@@ -23,7 +23,6 @@ SELECT
 FROM
 	timetable JOIN curs ON timetable.curs = curs.id
 		JOIN day ON timetable.day = day.id
-		JOIN times ON timetable.hour = times.hour
 		JOIN subject ON curs.subject = subject.id
 		JOIN room ON curs.room = room.id
 		JOIN teacher ON curs.teacher = teacher.id

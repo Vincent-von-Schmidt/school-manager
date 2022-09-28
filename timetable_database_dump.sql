@@ -34,9 +34,9 @@ CREATE TABLE public.curs (
     subject INT,
     room INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (teacher) REFERENCES public.teacher (id) ON DELETE CASCADE,
-    FOREIGN KEY (subject) REFERENCES public.subject (id) ON DELETE CASCADE,
-    FOREIGN KEY (room) REFERENCES public.room (id) ON DELETE CASCADE
+    FOREIGN KEY (teacher) REFERENCES public.teacher (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (subject) REFERENCES public.subject (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (room) REFERENCES public.room (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS public.times CASCADE;
@@ -69,10 +69,10 @@ CREATE TABLE public.timetable (
     curs INT,
     semester INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (day) REFERENCES public.day (id) ON DELETE CASCADE,
-    FOREIGN KEY (hour) REFERENCES public.times (hour) ON DELETE CASCADE,
-    FOREIGN KEY (curs) REFERENCES public.curs (id) ON DELETE CASCADE,
-    FOREIGN KEY (semester) REFERENCES public.semester (id) ON DELETE CASCADE
+    FOREIGN KEY (day) REFERENCES public.day (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (hour) REFERENCES public.times (hour) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (curs) REFERENCES public.curs (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (semester) REFERENCES public.semester (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 INSERT INTO public.times VALUES 
