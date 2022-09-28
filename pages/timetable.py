@@ -16,7 +16,7 @@ class Timetable(QFrame):
         )
 
         cursor = connection.cursor()
-
+        
         cursor.execute("""
 
         SELECT 
@@ -27,7 +27,8 @@ class Timetable(QFrame):
             room.name as room,
             FORMAT('%s, %s', teacher.last_name, teacher.first_name) AS teacher
         FROM
-            timetable JOIN curs ON timetable.curs = curs.id
+            timetable 
+                JOIN curs ON timetable.curs = curs.id
                 JOIN day ON timetable.day = day.id
                 JOIN subject ON curs.subject = subject.id
                 JOIN room ON curs.room = room.id
@@ -42,6 +43,8 @@ class Timetable(QFrame):
         self.layout.addWidget(headline := QLabel("timetable"))
         headline.setObjectName("headline") # css ident
 
+        # rows -> 34
+        # columns -> 6
         self.table = QTableWidget(34, 6, self)
 
         # set header
@@ -51,6 +54,7 @@ class Timetable(QFrame):
             count += 1
 
         # set content
+        # index as cordinates -> fetch_index = y, content_index = x
         for fetch_index, fetch in enumerate(cursor.fetchall()):
             for content_index, content in enumerate(fetch):
                 self.table.setItem(fetch_index + 1, content_index, QTableWidgetItem(content))
