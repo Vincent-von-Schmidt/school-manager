@@ -50,7 +50,7 @@ class Timetable(QFrame):
         # set header
         count = 0
         for x in cursor.description:
-            self.table.setItem(0, count, QTableWidgetItem(x[0]))
+            self.table.setItem(0, count, QTableWidgetItem(str(x[0])))
             count += 1
 
         # set content
@@ -58,7 +58,7 @@ class Timetable(QFrame):
         # fetch_index + 1 -> 0 = header
         for fetch_index, fetch in enumerate(cursor.fetchall()):
             for content_index, content in enumerate(fetch):
-                self.table.setItem(fetch_index + 1, content_index, QTableWidgetItem(content))
+                self.table.setItem(fetch_index + 1, content_index, QTableWidgetItem(str(content)))
 
         self.layout.addWidget(self.table)
 
