@@ -21,7 +21,8 @@ class Timetable(QFrame):
 
         SELECT 
             day.name AS day,
-            timetable.hour,
+            times.hour,
+            times.start_time AS start,
             curs.name AS curs_id,
             subject.name AS subject,
             room.name as room,
@@ -33,6 +34,7 @@ class Timetable(QFrame):
                 JOIN subject ON curs.subject = subject.id
                 JOIN room ON curs.room = room.id
                 JOIN teacher ON curs.teacher = teacher.id
+                JOIN times ON timetable.hour = times.hour
         WHERE timetable.semester = 1
         ORDER BY timetable.id ASC;
 
@@ -44,10 +46,11 @@ class Timetable(QFrame):
         headline.setObjectName("headline") # css ident
 
         # rows -> 34
-        # columns -> 6
-        self.table = QTableWidget(34, 6, self)
+        # columns -> 7
+        self.table = QTableWidget(34, 7, self)
 
-        # set header
+        # set headers
+        # cordinates -> 0 -> y, count -> x
         count = 0
         for x in cursor.description:
             self.table.setItem(0, count, QTableWidgetItem(str(x[0])))
