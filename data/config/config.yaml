@@ -11,4 +11,4 @@ timetable:
   user: "postgres"
   password: "delta1"
 
-language: "en_us"
+language: "de_de"

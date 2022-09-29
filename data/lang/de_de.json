@@ -31,5 +31,11 @@
     "back": "zurück",
     "main menu": "Hauptmenü",
     "school": "Schule",
-    "manager": "manager"
+    "manager": "manager",
+    "debug": "Fehlersuche",
+    "light": "hell",
+    "dark": "dunkel",
+    "color": "Farbe",
+    "hello": "Hallo",
+    "world": "Welt"
 }
