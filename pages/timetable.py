@@ -20,7 +20,7 @@ class Timetable(QFrame):
         cursor.execute("""
 
         SELECT
-            times.hour,
+            FORMAT('%s., %s - %s', times.hour, times.start_time, times.end_time) AS hour,
             timetable_monday.subject AS monday,
             timetable_tuesday.subject AS tuesday,
             timetable_wednesday.subject AS wednesday,
@@ -106,11 +106,14 @@ class Timetable(QFrame):
                 if content == None:
                     content = ""
                     
-                self.table.setItem(
-                    fetch_index + 1,
-                    content_index,
-                    QTableWidgetItem(lang[str(content)])
-                )
+                try:
+                    self.table.setItem(
+                        fetch_index + 1,
+                        content_index,
+                        QTableWidgetItem(lang[str(content)])
+                    )
+                except KeyError:
+                    print("translation error")
 
         self.layout.addWidget(self.table)
 
