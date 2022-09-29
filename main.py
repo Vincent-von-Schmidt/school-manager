@@ -11,7 +11,7 @@ if __name__ == "__main__":
         config = yaml.safe_load(file.read())
 
     with open("lang/{}.json".format(config["language"]), "r") as file:
-        lang=json.loads(file.read())
+        lang = json.loads(file.read())
 
     window = Window(lang=lang, config=config)
 
