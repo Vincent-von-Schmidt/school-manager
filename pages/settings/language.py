@@ -15,6 +15,8 @@ class Language(QFrame):
         self.lang_switcher.addItem("English")
         self.lang_switcher.addItem("German")
 
+        # self.lang_switcher.currentIndexChanged(lambda: print(self.lang_switcher.currentText()))
+
         self.layout.addWidget(self.lang_switcher)
 
         self.setLayout(self.layout)
