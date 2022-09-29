@@ -20,10 +20,10 @@ class Settings(QFrame):
         self.layout = QVBoxLayout(self)
 
         self.list = widgets.list_tabs.ListTabs()
-        self.list.addWidget(lang["general"], pages.settings.general.General(), QIcon("assets/settings.ico"))
-        self.list.addWidget(lang["design"], pages.settings.preferences.Preferences())
-        self.list.addWidget(lang["timetable"], pages.settings.timetable.Timetable())
-        self.list.addWidget(lang["language"], pages.settings.language.Language())
+        self.list.addWidget(lang["general"], pages.settings.general.General(lang=lang, config=config), QIcon("assets/settings.ico"))
+        self.list.addWidget(lang["design"], pages.settings.preferences.Preferences(lang=lang, config=config))
+        self.list.addWidget(lang["timetable"], pages.settings.timetable.Timetable(lang=lang, config=config))
+        self.list.addWidget(lang["language"], pages.settings.language.Language(lang=lang, config=config))
 
         self.layout.addWidget(self.list)
 

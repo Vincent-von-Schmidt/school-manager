@@ -20,7 +20,7 @@ class Timetable(QFrame):
         cursor.execute("""
 
         SELECT
-            FORMAT('%s., %s - %s', times.hour, times.start_time, times.end_time) AS hour,
+            FORMAT('%s. %s - %s', times.hour, times.start_time, times.end_time) AS hour,
             timetable_monday.subject AS monday,
             timetable_tuesday.subject AS tuesday,
             timetable_wednesday.subject AS wednesday,
@@ -103,6 +103,8 @@ class Timetable(QFrame):
         # fetch_index + 1 -> 0 = header
         for fetch_index, fetch in enumerate(cursor.fetchall()):
             for content_index, content in enumerate(fetch):
+
+                # NULL check
                 if content == None:
                     content = ""
                     

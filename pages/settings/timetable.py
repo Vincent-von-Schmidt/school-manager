@@ -5,7 +5,7 @@ import widgets.div
 
 
 class Timetable(QFrame):
-    def __init__(self) -> None:
+    def __init__(self, lang: dict, config: dict) -> None:
         super().__init__()
 
         self.layout = QVBoxLayout(self)
