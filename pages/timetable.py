@@ -105,6 +105,7 @@ class Timetable(QFrame):
             for content_index, content in enumerate(fetch):
                 if content == None:
                     content = ""
+                    
                 self.table.setItem(
                     fetch_index + 1,
                     content_index,

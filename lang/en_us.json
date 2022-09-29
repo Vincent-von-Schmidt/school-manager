@@ -1,5 +1,26 @@
-[
-    [
-        
-    ]
-]
+{
+    "timetable": "timetable",
+    "settings": "settings",
+    "general": "general",
+    "preferences": "preferences",
+    "language": "language",
+    "day": "day",
+    "week": "week",
+    "year": "year",
+    "monday": "monday",
+    "tuesday": "tuesday",
+    "wednesday": "wednesday",
+    "thursday": "thursday",
+    "friday": "friday",
+    "english": "english",
+    "physics": "physics",
+    "history": "history",
+    "mathematics": "mathematics",
+    "astronomy": "astronomy",
+    "informatics": "informatics",
+    "musics": "musics",
+    "german": "german",
+    "swimming": "swimming",
+    "sports": "sports",
+    "psychology": "psychology"
+}

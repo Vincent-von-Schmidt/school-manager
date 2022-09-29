@@ -7,7 +7,7 @@ import pages.settings.settings
 
 
 class Window(QFrame):
-    def __init__(self) -> None:
+    def __init__(self, lang: dict) -> None:
         super().__init__()
 
         # config
