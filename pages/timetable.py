@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import (
 import psycopg2
 
 class Timetable(QFrame):
-    def __init__(self) -> None:
+    def __init__(self, lang: dict) -> None:
         super().__init__()
 
         connection = psycopg2.connect(
@@ -84,7 +84,7 @@ class Timetable(QFrame):
 
         self.layout = QVBoxLayout(self)
 
-        self.layout.addWidget(headline := QLabel("timetable"))
+        self.layout.addWidget(headline := QLabel(lang["timetable"]))
         headline.setObjectName("headline") # css ident
 
         # rows -> 10
@@ -95,7 +95,7 @@ class Timetable(QFrame):
         # cordinates -> 0 -> y, count -> x
         count = 0
         for x in cursor.description:
-            self.table.setItem(0, count, QTableWidgetItem(str(x[0])))
+            self.table.setItem(0, count, QTableWidgetItem(lang[str(x[0])]))
             count += 1
 
         # set content
@@ -109,12 +109,12 @@ class Timetable(QFrame):
                 self.table.setItem(
                     fetch_index + 1,
                     content_index,
-                    QTableWidgetItem(str(content))
+                    QTableWidgetItem(lang[str(content)])
                 )
 
         self.layout.addWidget(self.table)
 
-        self.button = QPushButton("back to main menu")
+        self.button = QPushButton(lang["back"])
         self.layout.addWidget(self.button)
 
         self.setLayout(self.layout)

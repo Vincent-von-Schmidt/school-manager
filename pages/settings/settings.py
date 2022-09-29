@@ -14,20 +14,20 @@ import widgets.list_tabs
 
 
 class Settings(QFrame):
-    def __init__(self) -> None:
+    def __init__(self, lang: dict) -> None:
         super().__init__()
 
         self.layout = QVBoxLayout(self)
 
         self.list = widgets.list_tabs.ListTabs()
-        self.list.addWidget("general", pages.settings.general.General(), QIcon("assets/settings.ico"))
-        self.list.addWidget("preferences", pages.settings.preferences.Preferences())
-        self.list.addWidget("timetable", pages.settings.timetable.Timetable())
-        self.list.addWidget("language", pages.settings.language.Language())
+        self.list.addWidget(lang["general"], pages.settings.general.General(), QIcon("assets/settings.ico"))
+        self.list.addWidget(lang["design"], pages.settings.preferences.Preferences())
+        self.list.addWidget(lang["timetable"], pages.settings.timetable.Timetable())
+        self.list.addWidget(lang["language"], pages.settings.language.Language())
 
         self.layout.addWidget(self.list)
 
-        self.button = QPushButton("back to main menu")
+        self.button = QPushButton(lang["back"])
         self.layout.addWidget(self.button)
 
         self.setLayout(self.layout)

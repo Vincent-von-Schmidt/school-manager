@@ -17,9 +17,9 @@ class Window(QFrame):
         self.layout = QVBoxLayout(self)
         self.stack = QStackedWidget(self)
 
-        self.main_menu = pages.main_menu.MainMenu()
-        self.timetable = pages.timetable.Timetable()
-        self.settings = pages.settings.settings.Settings()
+        self.main_menu = pages.main_menu.MainMenu(lang=lang)
+        self.timetable = pages.timetable.Timetable(lang=lang)
+        self.settings = pages.settings.settings.Settings(lang=lang)
         
         self.stack.addWidget(self.main_menu)
         self.stack.addWidget(self.timetable)
