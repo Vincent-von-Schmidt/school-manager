@@ -1,16 +1,14 @@
-settings:
+general:
+  test: true
 
-  general:
-    test: true
+design:
+  color_mode: "dark"
 
-  preferences:
-    color_mode: "light"
+timetable:
+  host: "192.168.178.23"
+  port: "5400"
+  database: "school"
+  user: "postgres"
+  password: "delta1"
 
-  timetable:
-    host: "192.168.178.23"
-    port: "5400"
-    database: "school"
-    user: "postgres"
-    password: "delta1"
-
-  language: "English"
+language: "en_us"

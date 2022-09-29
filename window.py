@@ -7,7 +7,7 @@ import pages.settings.settings
 
 
 class Window(QFrame):
-    def __init__(self, lang: dict) -> None:
+    def __init__(self, lang: dict, config: dict) -> None:
         super().__init__()
 
         # config
@@ -17,9 +17,9 @@ class Window(QFrame):
         self.layout = QVBoxLayout(self)
         self.stack = QStackedWidget(self)
 
-        self.main_menu = pages.main_menu.MainMenu(lang=lang)
-        self.timetable = pages.timetable.Timetable(lang=lang)
-        self.settings = pages.settings.settings.Settings(lang=lang)
+        self.main_menu = pages.main_menu.MainMenu(lang=lang, config=config)
+        self.timetable = pages.timetable.Timetable(lang=lang, config=config)
+        self.settings = pages.settings.settings.Settings(lang=lang, config=config)
         
         self.stack.addWidget(self.main_menu)
         self.stack.addWidget(self.timetable)

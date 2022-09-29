@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import (
 
 
 class MainMenu(QFrame):
-    def __init__(self, lang: dict) -> None:
+    def __init__(self, lang: dict, config: dict) -> None:
         super().__init__()
 
         self.vLayout = QVBoxLayout(self)

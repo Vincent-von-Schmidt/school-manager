@@ -4,15 +4,15 @@ from PyQt6.QtWidgets import (
 import psycopg2
 
 class Timetable(QFrame):
-    def __init__(self, lang: dict) -> None:
+    def __init__(self, lang: dict, config: dict) -> None:
         super().__init__()
 
         connection = psycopg2.connect(
-            host="192.168.178.23",
-            port="5400",
-            database="school",
-            user="postgres",
-            password="delta1"
+            host=config["timetable"]["host"],
+            port=config["timetable"]["port"],
+            database=config["timetable"]["database"],
+            user=config["timetable"]["user"],
+            password=config["timetable"]["password"]
         )
 
         cursor = connection.cursor()

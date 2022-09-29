@@ -14,7 +14,7 @@ import widgets.list_tabs
 
 
 class Settings(QFrame):
-    def __init__(self, lang: dict) -> None:
+    def __init__(self, lang: dict, config: dict) -> None:
         super().__init__()
 
         self.layout = QVBoxLayout(self)
