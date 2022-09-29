@@ -107,13 +107,18 @@ class Timetable(QFrame):
                     content = ""
                     
                 try:
+                    content = lang[str(content)]
+
+                except KeyError:
+                    print("translation error")
+                    content = str(content)
+
+                finally:
                     self.table.setItem(
                         fetch_index + 1,
                         content_index,
-                        QTableWidgetItem(lang[str(content)])
+                        QTableWidgetItem(content)
                     )
-                except KeyError:
-                    print("translation error")
 
         self.layout.addWidget(self.table)
 
