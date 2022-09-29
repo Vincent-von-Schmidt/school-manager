@@ -1,10 +1,10 @@
 from PyQt6.QtWidgets import (
     QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QFrame
 )
-
+from data import translate
 
 class MainMenu(QFrame):
-    def __init__(self, lang: dict, config: dict) -> None:
+    def __init__(self) -> None:
         super().__init__()
 
         self.vLayout = QVBoxLayout(self)
@@ -12,10 +12,10 @@ class MainMenu(QFrame):
 
         self.vLayout.addWidget(QLabel("School manager"))
 
-        self.button_timetable = QPushButton(lang["timetable"])
+        self.button_timetable = QPushButton(translate("timetable"))
         self.button_timetable.setObjectName("highlight")
 
-        self.button_settings = QPushButton(lang["settings"])
+        self.button_settings = QPushButton(translate("settings"))
 
         self.hLayout.addWidget(self.button_timetable)
         self.hLayout.addWidget(self.button_settings) 

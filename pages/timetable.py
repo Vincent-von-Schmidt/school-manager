@@ -2,18 +2,19 @@ from PyQt6.QtWidgets import (
     QFrame, QVBoxLayout, QLabel, QPushButton, QTableWidget, QTableWidgetItem
 )
 import psycopg2
+import data
 
 
 class Timetable(QFrame):
-    def __init__(self, lang: dict, config: dict) -> None:
+    def __init__(self) -> None:
         super().__init__()
 
         connection = psycopg2.connect(
-            host=config["timetable"]["host"],
-            port=config["timetable"]["port"],
-            database=config["timetable"]["database"],
-            user=config["timetable"]["user"],
-            password=config["timetable"]["password"]
+            host=data.config["timetable"]["host"],
+            port=data.config["timetable"]["port"],
+            database=data.config["timetable"]["database"],
+            user=data.config["timetable"]["user"],
+            password=data.config["timetable"]["password"]
         )
 
         cursor = connection.cursor()
@@ -85,7 +86,7 @@ class Timetable(QFrame):
 
         self.layout = QVBoxLayout(self)
 
-        self.layout.addWidget(headline := QLabel(lang["timetable"]))
+        self.layout.addWidget(headline := QLabel(data.translate("timetable")))
         headline.setObjectName("headline") # css ident
 
         # rows -> 10
@@ -96,7 +97,7 @@ class Timetable(QFrame):
         # cordinates -> 0 -> y, count -> x
         count = 0
         for x in cursor.description:
-            self.table.setItem(0, count, QTableWidgetItem(lang[str(x[0])]))
+            self.table.setItem(0, count, QTableWidgetItem(data.translate(str(x[0]))))
             count += 1
 
         # set content
@@ -109,23 +110,15 @@ class Timetable(QFrame):
                 if content == None:
                     content = ""
                 
-                try:
-                    content = lang[str(content)]
-
-                except KeyError as error:
-                    print(f"translation error -> {error}")
-                    content = str(content)
-
-                finally:
-                    self.table.setItem(
-                        fetch_index + 1,
-                        content_index,
-                        QTableWidgetItem(content)
-                    )
+                self.table.setItem(
+                    fetch_index + 1,
+                    content_index,
+                    QTableWidgetItem(data.translate(str(content)))
+                )
 
         self.layout.addWidget(self.table)
 
-        self.button = QPushButton(lang["back"])
+        self.button = QPushButton(data.translate("back"))
         self.layout.addWidget(self.button)
 
         self.setLayout(self.layout)

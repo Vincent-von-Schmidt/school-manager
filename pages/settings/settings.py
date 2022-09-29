@@ -12,22 +12,24 @@ import pages.settings.timetable
 
 import widgets.list_tabs
 
+from data import translate
+
 
 class Settings(QFrame):
-    def __init__(self, lang: dict, config: dict) -> None:
+    def __init__(self) -> None:
         super().__init__()
 
         self.layout = QVBoxLayout(self)
 
         self.list = widgets.list_tabs.ListTabs()
-        self.list.addWidget(lang["general"], pages.settings.general.General(lang=lang, config=config), QIcon("assets/settings.ico"))
-        self.list.addWidget(lang["design"], pages.settings.preferences.Preferences(lang=lang, config=config))
-        self.list.addWidget(lang["timetable"], pages.settings.timetable.Timetable(lang=lang, config=config))
-        self.list.addWidget(lang["language"], pages.settings.language.Language(lang=lang, config=config))
+        self.list.addWidget(translate("general"), pages.settings.general.General(), QIcon("assets/settings.ico"))
+        self.list.addWidget(translate("design"), pages.settings.preferences.Preferences())
+        self.list.addWidget(translate("timetable"), pages.settings.timetable.Timetable())
+        self.list.addWidget(translate("language"), pages.settings.language.Language())
 
         self.layout.addWidget(self.list)
 
-        self.button = QPushButton(lang["back"])
+        self.button = QPushButton(translate("back"))
         self.layout.addWidget(self.button)
 
         self.setLayout(self.layout)
