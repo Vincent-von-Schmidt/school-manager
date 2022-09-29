@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import (
 )
 import psycopg2
 
+
 class Timetable(QFrame):
     def __init__(self, lang: dict, config: dict) -> None:
         super().__init__()
