@@ -1,5 +1,5 @@
 general:
-  test: true
+  debug: true
 
 design:
   color_mode: "dark"
