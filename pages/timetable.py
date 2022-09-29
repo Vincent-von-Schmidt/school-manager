@@ -108,12 +108,12 @@ class Timetable(QFrame):
                 # NULL check
                 if content == None:
                     content = ""
-                    
+                
                 try:
                     content = lang[str(content)]
 
-                except KeyError:
-                    print("translation error")
+                except KeyError as error:
+                    print(f"translation error -> {error}")
                     content = str(content)
 
                 finally:
