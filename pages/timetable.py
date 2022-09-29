@@ -19,24 +19,66 @@ class Timetable(QFrame):
         
         cursor.execute("""
 
-        SELECT 
-            day.name AS day,
+        SELECT
             times.hour,
-            times.start_time AS start,
-            curs.name AS curs_id,
-            subject.name AS subject,
-            room.name as room,
-            FORMAT('%s, %s', teacher.last_name, teacher.first_name) AS teacher
+            timetable_monday.subject AS monday,
+            timetable_tuesday.subject AS tuesday,
+            timetable_wednesday.subject AS wednesday,
+            timetable_thursday.subject AS thursday,
+            timetable_friday.subject AS friday
         FROM
-            timetable 
-                JOIN curs ON timetable.curs = curs.id
-                JOIN day ON timetable.day = day.id
-                JOIN subject ON curs.subject = subject.id
-                JOIN room ON curs.room = room.id
-                JOIN teacher ON curs.teacher = teacher.id
-                JOIN times ON timetable.hour = times.hour
-        WHERE timetable.semester = 1
-        ORDER BY timetable.id ASC;
+            times
+                LEFT JOIN (
+                    SELECT
+                        timetable.hour,
+                        subject.name AS subject
+                    FROM 
+                        timetable 
+                            JOIN curs ON timetable.curs = curs.id
+                            JOIN subject ON curs.subject = subject.id
+                    WHERE timetable.semester = 1 AND timetable.day = 1
+                        ) AS timetable_monday USING (hour)
+                LEFT JOIN (
+                    SELECT 
+                        timetable.hour,
+                        subject.name AS subject
+                    FROM
+                        timetable 
+                            JOIN curs ON timetable.curs = curs.id
+                            JOIN subject ON curs.subject = subject.id
+                    WHERE timetable.semester = 1 AND timetable.day = 2
+                    ) AS timetable_tuesday USING (hour)
+                LEFT JOIN (
+                    SELECT
+                        timetable.hour,
+                        subject.name AS subject
+                    FROM
+                        timetable 
+                            JOIN curs ON timetable.curs = curs.id
+                            JOIN subject ON curs.subject = subject.id
+                    WHERE timetable.semester = 1 AND timetable.day = 3
+                    ) AS timetable_wednesday USING (hour)
+                LEFT JOIN (
+                    SELECT
+                        timetable.hour,
+                        subject.name AS subject
+                    FROM
+                        timetable
+                            JOIN curs ON timetable.curs = curs.id
+                            JOIN subject ON curs.subject = subject.id
+                    WHERE timetable.semester = 1 AND timetable.day = 4
+                    ) AS timetable_thursday USING (hour)
+                LEFT JOIN (
+                    SELECT
+                        timetable.hour,
+                        subject.name AS subject
+                    FROM
+                        timetable
+                            JOIN curs ON timetable.curs = curs.id
+                            JOIN subject ON curs.subject = subject.id
+                    WHERE timetable.semester = 1 AND timetable.day = 5
+                    ) AS timetable_friday USING (hour)
+        WHERE times.hour > 0 AND times.hour < 10;
 
         """)
 
@@ -45,9 +87,9 @@ class Timetable(QFrame):
         self.layout.addWidget(headline := QLabel("timetable"))
         headline.setObjectName("headline") # css ident
 
-        # rows -> 34
-        # columns -> 7
-        self.table = QTableWidget(34, 7, self)
+        # rows -> 10
+        # columns -> 6
+        self.table = QTableWidget(10, 6, self)
 
         # set headers
         # cordinates -> 0 -> y, count -> x
@@ -61,6 +103,8 @@ class Timetable(QFrame):
         # fetch_index + 1 -> 0 = header
         for fetch_index, fetch in enumerate(cursor.fetchall()):
             for content_index, content in enumerate(fetch):
+                if content == None:
+                    content = ""
                 self.table.setItem(
                     fetch_index + 1,
                     content_index,
