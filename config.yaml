@@ -7,6 +7,10 @@ settings:
     color_mode: "light"
 
   timetable:
-    test: true
+    host: "192.168.178.23"
+    port: "5400"
+    database: "school"
+    user: "postgres"
+    password: "delta1"
 
   language: "English"
