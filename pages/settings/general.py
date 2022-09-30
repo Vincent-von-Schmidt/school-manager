@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import (
-    QVBoxLayout, QLabel, QPushButton, QFrame, QRadioButton
+    QVBoxLayout, QLabel, QPushButton, QFrame, QCheckBox
 )
 import data
 
@@ -11,6 +11,11 @@ class General(QFrame):
 
         self.layout.addWidget(QLabel("general"))
 
-        self.layout.addWidget(debug_button := QRadioButton(data.translate("debug")))
-
+        self.layout.addWidget(debug_button := QCheckBox(data.translate("debug")))
+        debug_button.setChecked(data.config["general"]["debug"])
+        debug_button.stateChanged.connect(lambda: self.set_debug(debug_button.isChecked()))
+        
         self.setLayout(self.layout)
+
+    def set_debug(self, state: bool) -> None:
+        data.config["general"]["debug"] = state

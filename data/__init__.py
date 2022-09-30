@@ -25,3 +25,10 @@ def translate(text: str) -> str:
             print(f"translation error -> {error}")
 
     return translation
+
+def safe_config() -> None:
+    """
+    Change the config entry in the file. 
+    """
+    with open("data/config/config.yaml", "w") as file: 
+        yaml.dump(config, file, default_flow_style=False)

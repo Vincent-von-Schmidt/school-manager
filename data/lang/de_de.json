@@ -2,7 +2,7 @@
     "timetable": "Stundenplan",
     "settings": "Einstellungen",
     "general": "Allgemein",
-    "design": "Design",
+    "design": "Aussehen",
     "language": "Sprache",
     "day": "Tag",
     "week": "Woche",
@@ -37,5 +37,6 @@
     "dark": "dunkel",
     "color": "Farbe",
     "hello": "Hallo",
-    "world": "Welt"
+    "world": "Welt",
+    "save": "speichern"
 }
