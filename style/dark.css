@@ -9,6 +9,10 @@ QFrame {
 
 QApplication { padding: 0px; }
 
+Window > QFrame { margin: 0px; }
+MainMenu > QFrame { margin: 0px; }
+QStackedWidget > QFrame { margin: 0px; }
+
 Div > QFrame {
     background-color: #2b2b2b;
     border-left: 25px;

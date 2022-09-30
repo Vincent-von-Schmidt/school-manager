@@ -1,6 +1,6 @@
 QFrame { border: 1px dotted red; }
-Window > QFrame { border: 3px dotted green; margin: 0px; }
+Window > QFrame { border: 3px dotted green; }
 
-MainMenu > QFrame { border: 1px dotted blue; margin: 0px; }
+MainMenu > QFrame { border: 1px dotted blue; }
 
-QStackedWidget > QFrame { border: 1px dotted yellow; margin: 0px; }
+QStackedWidget > QFrame { border: 1px dotted yellow; }
