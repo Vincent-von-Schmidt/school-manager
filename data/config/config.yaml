@@ -1,7 +1,7 @@
 design:
   color_mode: dark
 general:
-  debug: true
+  debug: false
 language: en_us
 timetable:
   database: school
