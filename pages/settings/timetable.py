@@ -10,10 +10,10 @@ class Timetable(QFrame):
 
         self.layout = QVBoxLayout(self)
 
-        self.div = widgets.div.Div()
+        self.layout.addWidget(div1 := widgets.div.Div())
+        div1.addWidget(QLabel(translate("div 1")))
 
-        self.div.addWidget(QLabel(translate("Hello World!")))
-
-        self.layout.addWidget(self.div)
+        self.layout.addWidget(div2 := widgets.div.Div())
+        div2.addWidget(QLabel(translate("div 2")))
 
         self.setLayout(self.layout)
