@@ -16,4 +16,12 @@ class Timetable(QFrame):
         self.layout.addWidget(div2 := widgets.div.Div())
         div2.addWidget(QLabel(translate("div 2")))
 
+        self.layout.addWidget(div3 := widgets.div.Div())
+        div3.addWidget(QLabel(translate("div 3")))
+
+        self.layout.addWidget(div4 := widgets.div.Div())
+        div4.addWidget(QLabel(translate("div 4")))
+
+        self.layout.setSpacing(0)
+
         self.setLayout(self.layout)
