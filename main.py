@@ -1,5 +1,6 @@
 from window import Window
 from PyQt6.QtWidgets import QApplication
+from PyQt6.QtCore import Qt
 import sys
 import data
 

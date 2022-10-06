@@ -104,7 +104,6 @@ class Timetable(QFrame):
 
             # set content
             # index as cordinates -> fetch_index = y, content_index = x
-            # fetch_index + 1 -> 0 = header
             for fetch_index, fetch in enumerate(cursor.fetchall()):
                 for content_index, content in enumerate(fetch):
 
@@ -112,19 +111,25 @@ class Timetable(QFrame):
                     if content == None:
                         content = ""
                     
+                    # fetch_index + 1 -> 0 = header
                     self.table.setItem(
                         fetch_index + 1,
                         content_index,
-                        item := QTableWidgetItem(data.translate(str(content)))
+                        QTableWidgetItem(data.translate(str(content)))
                     )
 
-                item.setFlags(Qt.ItemIsSelectable|Qt.ItemIsEnabled|Qt.ItemIsEditable)
+            if data.debug:
+                self.table.cellClicked.connect(
+                    lambda: print(
+                        f"x = {self.table.currentColumn()}; y = {self.table.currentRow()}"
+                    ))
 
-            self.table.cellClicked.connect(lambda: print(f"x = {self.table.currentColumn()}; y = {self.table.currentRow()}"))
+            self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
 
             self.layout.addWidget(self.table)
 
         except psycopg2.OperationalError as error:
+            # in case connection to database server failed 
             self.layout.addWidget(QLabel(str(error)))
 
         self.button = QPushButton(data.translate("back"))
