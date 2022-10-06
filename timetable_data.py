@@ -2,7 +2,7 @@ import psycopg2
 import tabulate
 
 connection = psycopg2.connect(
-    host="192.168.178.23",
+    host="127.0.0.1",
     port="5400",
     database="school",
     user="postgres",
@@ -35,7 +35,7 @@ FROM
 	timetable JOIN curs ON timetable.curs = curs.id
 		JOIN day ON timetable.day = day.id
 		JOIN subject ON curs.subject = subject.id
-		JOIN room ON curs.room = room.id
+		JOIN room ON timetable.room = room.id
 		JOIN teacher ON curs.teacher = teacher.id
 WHERE timetable.semester = 1
 ORDER BY timetable.id ASC;
