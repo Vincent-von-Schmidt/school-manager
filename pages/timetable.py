@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import (
     QFrame, QVBoxLayout, QLabel, QPushButton, QTableWidget, QTableWidgetItem
 )
+from PyQt6.QtCore import Qt
 import psycopg2
 import data
 
@@ -114,8 +115,12 @@ class Timetable(QFrame):
                     self.table.setItem(
                         fetch_index + 1,
                         content_index,
-                        QTableWidgetItem(data.translate(str(content)))
+                        item := QTableWidgetItem(data.translate(str(content)))
                     )
+
+                item.setFlags(Qt.ItemIsSelectable|Qt.ItemIsEnabled|Qt.ItemIsEditable)
+
+            self.table.cellClicked.connect(lambda: print(f"x = {self.table.currentColumn()}; y = {self.table.currentRow()}"))
 
             self.layout.addWidget(self.table)
 
