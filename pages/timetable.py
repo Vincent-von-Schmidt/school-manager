@@ -1,18 +1,19 @@
 from PyQt6.QtWidgets import (
-    QFrame, QVBoxLayout, QLabel, QPushButton, QTableWidget, QTableWidgetItem
+    QFrame, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QTableWidget, QTableWidgetItem
 )
 from PyQt6.QtCore import Qt
 import psycopg2
 import data
-
+from widgets.div import Div
 
 class Timetable(QFrame):
     def __init__(self) -> None:
         super().__init__()
 
-        self.layout = QVBoxLayout(self)
+        self.vLayout = QVBoxLayout(self)
+        self.hLayout = QHBoxLayout(self)
 
-        self.layout.addWidget(headline := QLabel(data.translate("timetable")))
+        self.vLayout.addWidget(headline := QLabel(data.translate("timetable")))
         headline.setObjectName("headline") # css ident
 
         try: 
@@ -126,13 +127,39 @@ class Timetable(QFrame):
 
             self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
 
-            self.layout.addWidget(self.table)
+            self.hLayout.addWidget(self.table, 1)
+
+            self.hLayout.addWidget(info_screen := Div(), 1)
+
+            # placeholder
+            info_screen.addWidget(header := QLabel(data.translate("info")))
+            
+            # header
+            self.table.cellClicked.connect(lambda: header.setText(
+                data.translate(
+                    str(self.table.item(0, self.table.currentColumn()).text())
+                )
+            ))
+
+            cursor.execute("""
+            
+                SELECT 
+                    *
+                FROM 
+                    timetable;
+            
+            """)
+
+            # content
+            self.table.cellClicked.connect(lambda: print(cursor.fetchall()))
 
         except psycopg2.OperationalError as error:
             # in case connection to database server failed 
-            self.layout.addWidget(QLabel(str(error)))
+            self.hLayout.addWidget(QLabel(str(error)))
+
+        self.vLayout.addLayout(self.hLayout)
 
         self.button = QPushButton(data.translate("back"))
-        self.layout.addWidget(self.button)
+        self.vLayout.addWidget(self.button)
 
-        self.setLayout(self.layout)
+        self.setLayout(self.vLayout)
