@@ -131,9 +131,10 @@ class Timetable(QFrame):
 
             self.hLayout.addWidget(info_screen := Div(), 1)
 
-            # placeholder
+            # infoscreen
             info_screen.addWidget(header := QLabel(data.translate("info")))
-            
+            info_screen.addWidget(content := QLabel(""))
+
             # header
             self.table.cellClicked.connect(lambda: header.setText(
                 data.translate(
@@ -144,14 +145,20 @@ class Timetable(QFrame):
             cursor.execute("""
             
                 SELECT 
-                    *
+                    curs.name AS curs,
+                    subject.name AS subject,
+                    teacher.last_name AS teacher
                 FROM 
-                    timetable;
+                    curs
+                        JOIN subject ON curs.subject = subject.id
+                        JOIN teacher ON curs.teacher = teacher.id;
             
             """)
 
             # content
-            self.table.cellClicked.connect(lambda: print(cursor.fetchall()))
+            self.table.cellClicked.connect(lambda: content.setText(
+                data.translate(str(cursor.fetchall()))
+            ))
 
         except psycopg2.OperationalError as error:
             # in case connection to database server failed 
