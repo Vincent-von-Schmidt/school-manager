@@ -137,6 +137,7 @@ class Timetable(QFrame):
             self.content = QLabel(data.translate("info"))
             info_screen.addWidget(self.content)
 
+            # infoscreen update
             self.table.cellClicked.connect(self.info_update)
 
         except psycopg2.OperationalError as error:
