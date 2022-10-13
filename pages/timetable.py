@@ -5,6 +5,8 @@ from PyQt6.QtCore import Qt
 import psycopg2
 import data
 from widgets.div import Div
+from tabulate import tabulate
+
 
 class Timetable(QFrame):
     def __init__(self) -> None:
@@ -25,9 +27,9 @@ class Timetable(QFrame):
                 password=data.config["timetable"]["password"]
             )
 
-            cursor = connection.cursor()
+            self.cursor = connection.cursor()
             
-            cursor.execute("""
+            self.cursor.execute("""
 
             SELECT
                 FORMAT('%s. %s - %s', times.hour, times.start_time, times.end_time) AS hour,
@@ -99,13 +101,13 @@ class Timetable(QFrame):
             # set headers
             # cordinates -> 0 -> y, count -> x
             count = 0
-            for x in cursor.description:
+            for x in self.cursor.description:
                 self.table.setItem(0, count, QTableWidgetItem(data.translate(str(x[0]))))
                 count += 1
 
             # set content
             # index as cordinates -> fetch_index = y, content_index = x
-            for fetch_index, fetch in enumerate(cursor.fetchall()):
+            for fetch_index, fetch in enumerate(self.cursor.fetchall()):
                 for content_index, content in enumerate(fetch):
 
                     # NULL check
@@ -132,33 +134,10 @@ class Timetable(QFrame):
             self.hLayout.addWidget(info_screen := Div(), 1)
 
             # infoscreen
-            info_screen.addWidget(header := QLabel(data.translate("info")))
-            info_screen.addWidget(content := QLabel(""))
+            self.content = QLabel(data.translate("info"))
+            info_screen.addWidget(self.content)
 
-            # header
-            self.table.cellClicked.connect(lambda: header.setText(
-                data.translate(
-                    str(self.table.item(0, self.table.currentColumn()).text())
-                )
-            ))
-
-            cursor.execute("""
-            
-                SELECT 
-                    curs.name AS curs,
-                    subject.name AS subject,
-                    teacher.last_name AS teacher
-                FROM 
-                    curs
-                        JOIN subject ON curs.subject = subject.id
-                        JOIN teacher ON curs.teacher = teacher.id;
-            
-            """)
-
-            # content
-            self.table.cellClicked.connect(lambda: content.setText(
-                data.translate(str(cursor.fetchall()))
-            ))
+            self.table.cellClicked.connect(self.info_update)
 
         except psycopg2.OperationalError as error:
             # in case connection to database server failed 
@@ -170,3 +149,36 @@ class Timetable(QFrame):
         self.vLayout.addWidget(self.button)
 
         self.setLayout(self.vLayout)
+
+    def info_update(self) -> None:
+        item = self.table.item(self.table.currentRow(), self.table.currentColumn()).text()
+        day = self.table.item(0, self.table.currentColumn()).text()
+        
+        # NULL check
+        if item == "":
+            self.content.setText(data.translate("free"))
+            return
+
+        self.cursor.execute(f"""
+            
+            SELECT DISTINCT
+                curs.name AS curs,
+                subject.name AS subject,
+                FORMAT('%s %s', teacher.first_name, teacher.last_name) AS teacher,
+                room.name AS room
+            FROM 
+                curs
+                    JOIN subject ON curs.subject = subject.id
+                    JOIN teacher ON curs.teacher = teacher.id
+                    JOIN timetable ON curs.id = timetable.curs
+                    JOIN room ON timetable.room = room.id
+                    JOIN day ON timetable.day = day.id
+            WHERE subject.name = '{item}' AND day.name = '{day.capitalize()}';
+        
+        """)        
+
+        self.content.setText(str(tabulate(
+            [data.translate(x) for x in self.cursor.fetchall()],
+            headers=[data.translate(x[0]) for x in self.cursor.description],
+            tablefmt="presto"
+        )))

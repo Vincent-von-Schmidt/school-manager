@@ -38,5 +38,7 @@
     "color": "color",
     "hello": "hello",
     "world": "world",
-    "save": "save"
+    "save": "save",
+    "curs": "curs",
+    "subject": "subject"
 }
