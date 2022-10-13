@@ -2,7 +2,7 @@ design:
   color_mode: dark
 general:
   debug: true
-language: en_us
+language: de_de
 timetable:
   database: school
   host: 127.0.0.1
