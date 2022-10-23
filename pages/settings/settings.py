@@ -1,9 +1,10 @@
 from PyQt6.QtWidgets import (
     QVBoxLayout, 
     QPushButton,
-    QFrame
+    QFrame,
+    QScrollArea
 )
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon, QPalette
 
 import pages.settings.general
 import pages.settings.language
@@ -24,7 +25,8 @@ class Settings(QFrame):
         self.list = widgets.list_tabs.ListTabs()
         self.list.addWidget(translate("general"), pages.settings.general.General(), QIcon("assets/settings.ico"))
         self.list.addWidget(translate("design"), pages.settings.preferences.Preferences())
-        self.list.addWidget(translate("timetable"), pages.settings.timetable.Timetable())
+        self.list.addWidget(translate("timetable"), timetable_scroll := QScrollArea(self))
+        timetable_scroll.setWidget(pages.settings.timetable.Timetable())
         self.list.addWidget(translate("language"), pages.settings.language.Language())
 
         self.list.addWidget_left(save_button := QPushButton(translate("save")))

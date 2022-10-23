@@ -9,7 +9,7 @@ QFrame {
 
 QApplication { padding: 0px; }
 
-Window > QFrame { margin: 0px; }
+/* Window > QFrame { margin: 0px; } */
 MainMenu > QFrame { margin: 0px; }
 QStackedWidget > QFrame { margin: 0px; }
 

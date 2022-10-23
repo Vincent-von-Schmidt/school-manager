@@ -8,3 +8,4 @@ MainMenu > QFrame { border: 1px dotted blue; }
 QStackedWidget > QFrame { border: 1px dotted yellow; }
 
 Div > QFrame { border: 1px dotted orange; }
+

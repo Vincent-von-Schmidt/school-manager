@@ -1,11 +1,11 @@
 design:
   color_mode: dark
 general:
-  debug: true
-language: de_de
+  debug: false 
+language: en_us
 timetable:
   database: school
-  host: 127.0.0.1
+  host: 192.168.178.23
   password: delta1
   port: '5400'
   user: postgres

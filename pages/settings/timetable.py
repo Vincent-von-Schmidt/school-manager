@@ -1,8 +1,9 @@
 from PyQt6.QtWidgets import (
-    QVBoxLayout, QLabel, QPushButton, QFrame
+    QVBoxLayout, QLabel, QPushButton, QFrame, QScrollArea
 )
 import widgets.div
 from data import translate
+
 
 class Timetable(QFrame):
     def __init__(self) -> None:
@@ -25,3 +26,4 @@ class Timetable(QFrame):
         self.layout.setSpacing(0)
 
         self.setLayout(self.layout)
+        self.show()
