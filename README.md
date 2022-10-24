@@ -5,6 +5,7 @@
     - database -> Postgresql
     - xml
     - json
+  - Archenhold Gymnasium -> Vetretungsplan integration
 - homework planer
   - google calendar sync
 - exam planer 

@@ -3,3 +3,4 @@ pyjson
 pyyaml
 tabulate
 psycopg2-binary
+pyhtml
