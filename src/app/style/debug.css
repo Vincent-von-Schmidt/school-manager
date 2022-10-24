@@ -1,0 +1,11 @@
+QWidget { border: 1px dashed cyan; }
+
+QFrame { border: 2px dotted red; }
+Window > QFrame { border: 3px dotted green; }
+
+MainMenu > QFrame { border: 1px dotted blue; }
+
+QStackedWidget > QFrame { border: 1px dotted yellow; }
+
+Div > QFrame { border: 1px dotted orange; }
+
