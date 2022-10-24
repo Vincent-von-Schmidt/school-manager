@@ -177,6 +177,7 @@ class Timetable(QFrame):
         
         """)        
 
+        # add informations, in form of an table, to the infoscreen
         self.content.setText(str(tabulate(
             [data.translate(x) for x in self.cursor.fetchall()],
             headers=[data.translate(x[0]) for x in self.cursor.description],
