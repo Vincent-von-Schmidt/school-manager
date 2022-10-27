@@ -1,6 +1,3 @@
-CREATE DATABASE IF NOT EXISTS school; 
-USE school;
-
 DROP TABLE IF EXISTS public.teacher CASCADE;
 CREATE TABLE public.teacher (
     id SERIAL,
