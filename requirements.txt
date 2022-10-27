@@ -4,3 +4,4 @@ pyyaml
 tabulate
 psycopg2-binary
 pyhtml
+mysql-connector-python
