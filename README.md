@@ -22,12 +22,19 @@ python3 -m pip install -r requirements.txt
 python3 main.py
 ```
 ### Without Python installation: 
-for Debian based systems (X11-forwarding currently not supported): 
+This will install docker on your system. The python enviroment will be created within a docker container. 
+#### Debian based: 
 ```sh
 ./run.sh
 ```
-Arch, Fedora and Windows support will be added in the future. 
+#### Windows (not tested):
+```
+.\run.ps1
+```
 ## data infrastructer
-Postgresql will be used as the databaseservice. EXPERIMENTAL!!!
-1. Upload the timetable_database_dump.sql file to your PostgreSQL server. 
+### PostgreSQL
+1. Upload the database_dump_postgresql.sql file to your PostgreSQL server. 
 2. Set the ip, username, password and databasename in the config.yaml file. 
+### MySQL
+1. Upload the database_dump_mysql.sql to your MySQL server.
+2. Set the ip, port, username, password and the databasename in the config.yaml. 
