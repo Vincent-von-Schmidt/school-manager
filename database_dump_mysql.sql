@@ -3,22 +3,22 @@ USE school;
 
 DROP TABLE IF EXISTS teacher CASCADE;
 CREATE TABLE teacher (
-    id SERIAL,
-    last_name VARCHAR,
-    first_name VARCHAR,
+    id INT NOT NULL AUTO_INCREMENT,
+    last_name VARCHAR(12),
+    first_name VARCHAR(10),
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS subject CASCADE;
 CREATE TABLE subject (
-    id SERIAL,
-    name VARCHAR,
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(11),
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS room CASCADE;
 CREATE TABLE room (
-    id SERIAL,
+    id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(4),
     building VARCHAR(2),
     floor INT,
@@ -28,7 +28,7 @@ CREATE TABLE room (
 
 DROP TABLE IF EXISTS curs CASCADE;
 CREATE TABLE curs (
-    id SERIAL,
+    id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(3),
     teacher INT,
     subject INT,
@@ -47,21 +47,21 @@ CREATE TABLE times (
 
 DROP TABLE IF EXISTS day CASCADE;
 CREATE TABLE day (
-    id SERIAL,
+    id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(9),
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS semester CASCADE;
 CREATE TABLE semester (
-    id SERIAL,
+    id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(2),
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS timetable CASCADE;
 CREATE TABLE timetable (
-    id SERIAL,
+    id INT NOT NULL AUTO_INCREMENT,
     day INT,
     hour INT,
     curs INT,
