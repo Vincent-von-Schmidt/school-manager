@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import (
     QFrame, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QTableWidget, QTableWidgetItem
 )
 import psycopg2
+import mysql.connector
 import src.data as data
 from src.widgets.div import Div
 from tabulate import tabulate
@@ -18,79 +19,103 @@ class Timetable(QFrame):
         headline.setObjectName("headline") # css ident
 
         try: 
-            connection = psycopg2.connect(
-                host=data.config["timetable"]["host"],
-                port=data.config["timetable"]["port"],
-                database=data.config["timetable"]["database"],
-                user=data.config["timetable"]["user"],
-                password=data.config["timetable"]["password"]
-            )
+            # database system
+            match data.config["timetable"]["system"]: 
+                case "postgresql":
+                    try:
+                        self.connection = psycopg2.connect(
+                            host=data.config["timetable"]["host"],
+                            port=data.config["timetable"]["port"],
+                            database=data.config["timetable"]["database"],
+                            user=data.config["timetable"]["user"],
+                            password=data.config["timetable"]["password"]
+                        )
 
-            self.cursor = connection.cursor()
-            
+                    except psycopg2.OperationalError as error:
+                        raise ConnectionError(error)
+
+                case "mysql":
+                    try:
+                        self.connection = mysql.connector.connect(
+                            host=data.config["timetable"]["host"],
+                            port=data.config["timetable"]["port"],
+                            user=data.config["timetable"]["user"],
+                            password=data.config["timetable"]["password"],
+                            database=data.config["timetable"]["database"]
+                        )
+
+                    except mysql.connector.errors.DatabaseError as error:
+                        raise ConnectionError(error)
+
+                case _:
+                    raise ConnectionError("No database system specified!")
+
+            self.cursor = self.connection.cursor()
+
+            # sql querry for the timetable
             self.cursor.execute("""
-
-            SELECT
-                FORMAT('%s. %s - %s', times.hour, times.start_time, times.end_time) AS hour,
-                timetable_monday.subject AS monday,
-                timetable_tuesday.subject AS tuesday,
-                timetable_wednesday.subject AS wednesday,
-                timetable_thursday.subject AS thursday,
-                timetable_friday.subject AS friday
-            FROM
-                times
-                    LEFT JOIN (
-                        SELECT
-                            timetable.hour,
-                            subject.name AS subject
-                        FROM 
-                            timetable 
-                                JOIN curs ON timetable.curs = curs.id
-                                JOIN subject ON curs.subject = subject.id
-                        WHERE timetable.semester = 1 AND timetable.day = 1
+            
+                SELECT
+                    CONCAT(times.hour, '. ', times.start_time, ' - ', times.end_time) AS hour,
+                    timetable_monday.subject AS monday,
+                    timetable_tuesday.subject AS tuesday,
+                    timetable_wednesday.subject AS wednesday,
+                    timetable_thursday.subject AS thursday,
+                    timetable_friday.subject AS friday
+                FROM
+                    times
+                        LEFT JOIN (
+                            SELECT
+                                timetable.hour,
+                                subject.name AS subject
+                            FROM 
+                                timetable 
+                                    JOIN curs ON timetable.curs = curs.id
+                                    JOIN subject ON curs.subject = subject.id
+                            WHERE timetable.semester = 1 AND timetable.day = 1
                             ) AS timetable_monday USING (hour)
-                    LEFT JOIN (
-                        SELECT 
-                            timetable.hour,
-                            subject.name AS subject
-                        FROM
-                            timetable 
-                                JOIN curs ON timetable.curs = curs.id
-                                JOIN subject ON curs.subject = subject.id
-                        WHERE timetable.semester = 1 AND timetable.day = 2
-                        ) AS timetable_tuesday USING (hour)
-                    LEFT JOIN (
-                        SELECT
-                            timetable.hour,
-                            subject.name AS subject
-                        FROM
-                            timetable 
-                                JOIN curs ON timetable.curs = curs.id
-                                JOIN subject ON curs.subject = subject.id
-                        WHERE timetable.semester = 1 AND timetable.day = 3
-                        ) AS timetable_wednesday USING (hour)
-                    LEFT JOIN (
-                        SELECT
-                            timetable.hour,
-                            subject.name AS subject
-                        FROM
-                            timetable
-                                JOIN curs ON timetable.curs = curs.id
-                                JOIN subject ON curs.subject = subject.id
-                        WHERE timetable.semester = 1 AND timetable.day = 4
-                        ) AS timetable_thursday USING (hour)
-                    LEFT JOIN (
-                        SELECT
-                            timetable.hour,
-                            subject.name AS subject
-                        FROM
-                            timetable
-                                JOIN curs ON timetable.curs = curs.id
-                                JOIN subject ON curs.subject = subject.id
-                        WHERE timetable.semester = 1 AND timetable.day = 5
-                        ) AS timetable_friday USING (hour)
-            WHERE times.hour > 0 AND times.hour < 10;
-
+                        LEFT JOIN (
+                            SELECT 
+                                timetable.hour,
+                                subject.name AS subject
+                            FROM
+                                timetable 
+                                    JOIN curs ON timetable.curs = curs.id
+                                    JOIN subject ON curs.subject = subject.id
+                            WHERE timetable.semester = 1 AND timetable.day = 2
+                            ) AS timetable_tuesday USING (hour)
+                        LEFT JOIN (
+                            SELECT
+                                timetable.hour,
+                                subject.name AS subject
+                            FROM
+                                timetable 
+                                    JOIN curs ON timetable.curs = curs.id
+                                    JOIN subject ON curs.subject = subject.id
+                            WHERE timetable.semester = 1 AND timetable.day = 3
+                            ) AS timetable_wednesday USING (hour)
+                        LEFT JOIN (
+                            SELECT
+                                timetable.hour,
+                                subject.name AS subject
+                            FROM
+                                timetable
+                                    JOIN curs ON timetable.curs = curs.id
+                                    JOIN subject ON curs.subject = subject.id
+                            WHERE timetable.semester = 1 AND timetable.day = 4
+                            ) AS timetable_thursday USING (hour)
+                        LEFT JOIN (
+                            SELECT
+                                timetable.hour,
+                                subject.name AS subject
+                            FROM
+                                timetable
+                                    JOIN curs ON timetable.curs = curs.id
+                                    JOIN subject ON curs.subject = subject.id
+                            WHERE timetable.semester = 1 AND timetable.day = 5
+                            ) AS timetable_friday USING (hour)
+                WHERE times.hour > 0 AND times.hour < 10;
+            
             """)
 
             # rows -> 10
@@ -120,6 +145,7 @@ class Timetable(QFrame):
                         QTableWidgetItem(data.translate(str(content)))
                     )
 
+            # debug position
             if data.debug:
                 self.table.cellClicked.connect(
                     lambda: print(
@@ -139,7 +165,7 @@ class Timetable(QFrame):
             # infoscreen update
             self.table.cellClicked.connect(self.info_update)
 
-        except psycopg2.OperationalError as error:
+        except ConnectionError as error:
             # in case connection to database server failed 
             self.hLayout.addWidget(QLabel(str(error)))
 
@@ -159,12 +185,15 @@ class Timetable(QFrame):
             self.content.setText(data.translate("free"))
             return
 
+        # connect to the database server 
+        self.cursor = self.connection.cursor()
+
         self.cursor.execute(f"""
             
             SELECT DISTINCT
                 curs.name AS curs,
                 subject.name AS subject,
-                FORMAT('%s %s', teacher.first_name, teacher.last_name) AS teacher,
+                CONCAT(teacher.first_name, ' ', teacher.last_name) AS teacher,
                 room.name AS room
             FROM 
                 curs
