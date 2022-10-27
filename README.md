@@ -17,6 +17,7 @@
 
 ## build and run
 ### With custom Python installation: 
+Python 3.10 required! 
 ```sh
 python3 -m pip install -r requirements.txt
 python3 main.py
