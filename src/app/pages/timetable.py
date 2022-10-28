@@ -177,6 +177,10 @@ class Timetable(QFrame):
         self.setLayout(self.vLayout)
 
     def info_update(self) -> None:
+        """
+        Update the content of the infoscreen, 
+        depending on the selected table cell. 
+        """
         item = self.table.item(self.table.currentRow(), self.table.currentColumn()).text()
         day = self.table.item(0, self.table.currentColumn()).text()
         
