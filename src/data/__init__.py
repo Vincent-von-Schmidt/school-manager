@@ -30,5 +30,5 @@ def safe_config() -> None:
     """
     Change the config entry in the file. 
     """
-    with open("data/config/config.yaml", "w") as file: 
+    with open("src/data/config/config.yaml", "w") as file: 
         yaml.dump(config, file, default_flow_style=False)
