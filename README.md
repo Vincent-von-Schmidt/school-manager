@@ -29,8 +29,13 @@ This will install docker on your system. The python enviroment will be created w
 ./run.sh
 ```
 #### Windows (not tested):
+##### Powershell:
 ```
 .\run.ps1
+```
+##### CMD: 
+```
+powershell -noexit "& ".\run.ps1"
 ```
 ## data infrastructer
 ### PostgreSQL
