@@ -1,4 +1,9 @@
-QFrame {
+* {
+    background-color: #202020;
+    color: white;
+}
+
+Window > QFrame {
     background-color: #202020;
     margin-left: 3px;
     margin-right: 36px;
@@ -20,6 +25,8 @@ Div > QFrame {
     margin: 4px !important;
     padding: 19px;
     min-height: 47px;
+    max-height: 47px;
+    min-width: fit-content;
 }
 
 QDialog {
