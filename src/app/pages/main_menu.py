@@ -1,26 +1,19 @@
-from PyQt6.QtWidgets import (
-    QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QFrame
-)
-from src.data import translate
+from PyQt6.QtWidgets import QFrame, QVBoxLayout
+from PyQt6.QtGui import QIcon
+from src.widgets.list_tabs import ListTabs
+from src.app.pages.timetable import Timetable
+from src.app.pages.settings.settings import Settings
 
 
 class MainMenu(QFrame):
     def __init__(self) -> None:
         super().__init__()
 
-        self.vLayout = QVBoxLayout(self)
-        self.hLayout = QHBoxLayout(self)
+        self.layout = QVBoxLayout(self)
 
-        self.vLayout.addWidget(QLabel("School manager"))
+        self.layout.addWidget(content := ListTabs())
+        content.addWidget("Dashboard", QFrame(), QIcon("assets/home.ico"))
+        content.addWidget("Timetable", Timetable()) 
+        content.addWidget("settings", Settings(), QIcon("assets/settings.ico"))
 
-        self.button_timetable = QPushButton(translate("timetable"))
-        self.button_timetable.setObjectName("highlight")
-
-        self.button_settings = QPushButton(translate("settings"))
-
-        self.hLayout.addWidget(self.button_timetable)
-        self.hLayout.addWidget(self.button_settings) 
-
-        self.vLayout.addLayout(self.hLayout)
-        
-        self.setLayout(self.vLayout)
+        self.setLayout(self.layout)

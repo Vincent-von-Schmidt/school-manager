@@ -12,11 +12,7 @@ class Timetable(QFrame):
     def __init__(self) -> None:
         super().__init__()
 
-        self.vLayout = QVBoxLayout(self)
-        self.hLayout = QHBoxLayout(self)
-
-        self.vLayout.addWidget(headline := QLabel(data.translate("timetable")))
-        headline.setObjectName("headline") # css ident
+        self.layout = QVBoxLayout(self)
 
         try: 
             # database system
@@ -154,9 +150,9 @@ class Timetable(QFrame):
 
             self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
 
-            self.hLayout.addWidget(self.table, 1)
+            self.layout.addWidget(self.table)
 
-            self.hLayout.addWidget(info_screen := Div(), 1)
+            self.layout.addWidget(info_screen := Div())
 
             # infoscreen
             self.content = QLabel(data.translate("info"))
@@ -167,14 +163,9 @@ class Timetable(QFrame):
 
         except ConnectionError as error:
             # in case connection to database server failed 
-            self.hLayout.addWidget(QLabel(str(error)))
+            self.layout.addWidget(QLabel(str(error)))
 
-        self.vLayout.addLayout(self.hLayout)
-
-        self.button = QPushButton(data.translate("back"))
-        self.vLayout.addWidget(self.button)
-
-        self.setLayout(self.vLayout)
+        self.setLayout(self.layout)
 
     def info_update(self) -> None:
         """
@@ -208,7 +199,7 @@ class Timetable(QFrame):
                     JOIN day ON timetable.day = day.id
             WHERE subject.name = '{item}' AND day.name = '{day.capitalize()}';
         
-        """)        
+        """)
 
         # add informations, in form of an table, to the infoscreen
         self.content.setText(str(tabulate(

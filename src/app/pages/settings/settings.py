@@ -25,9 +25,6 @@ class Settings(QFrame):
         self.list.addWidget(translate("general"), General(), QIcon("assets/settings.ico"))
         self.list.addWidget(translate("design"), Preferences())
 
-        # self.list.addWidget(translate("timetable"), timetable_scroll := QScrollArea(self))
-        # timetable_scroll.setWidget(Timetable())
-
         self.list.addWidget(translate("timetable"), Timetable())
 
         self.list.addWidget(translate("language"), Language())
@@ -37,8 +34,5 @@ class Settings(QFrame):
         save_button.clicked.connect(lambda: safe_config())
 
         self.layout.addWidget(self.list)
-
-        self.button = QPushButton(translate("back"))
-        self.layout.addWidget(self.button)
 
         self.setLayout(self.layout)
