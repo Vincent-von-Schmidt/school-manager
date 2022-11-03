@@ -4,7 +4,10 @@ from PyQt6.QtWidgets import (
     QHBoxLayout,
     QVBoxLayout,
     QListWidget,
-    QListWidgetItem
+    QListWidgetItem,
+    QScrollArea,
+    QScrollBar,
+    QFrame
 )
 from PyQt6.QtGui import QIcon
 
@@ -32,10 +35,28 @@ class ListTabs(QWidget):
     def addWidget(self, text: str, widget: QWidget, icon: QIcon = None) -> None:
         self.list.insertItem(self.counter, item := QListWidgetItem(text))
 
+        # icon check
         if icon is not None:
             item.setIcon(icon)
-            
-        self.stack.addWidget(widget)
+
+        # scroll area config
+        scroll_area = QScrollArea(self)
+        scroll_area.setVerticalScrollBar(QScrollBar(self))
+        scroll_area.setWidgetResizable(True)
+
+        # frame + layout creation
+        content = QFrame(self)
+        layout = QVBoxLayout(content)
+
+        # widget append
+        layout.addWidget(widget)
+
+        # add content frame as primary widget 
+        content.setLayout(layout)
+        scroll_area.setWidget(content)
+
+        # add scroll_area to stack, set counter for list + 1 
+        self.stack.addWidget(scroll_area)
         self.counter += 1
 
     def addWidget_left(self, widget: QWidget) -> None:
