@@ -63,7 +63,7 @@ QPushButton#highlight:hover { background-color: #66b3c2; }
 
 QListWidget {
     color: #e0e0e0;
-    border: 1px solid black;
+    border: 0px solid black;
 }
 
 QListWidgetItem {
