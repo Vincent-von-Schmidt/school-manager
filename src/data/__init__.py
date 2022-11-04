@@ -17,7 +17,7 @@ def translate(text: str) -> str:
     The program will continue with the given text. 
     """
     try:
-        translation = lang[text]
+        translation = lang[text.lower()]
     
     except KeyError as error:
         translation = text
