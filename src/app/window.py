@@ -11,7 +11,7 @@ class Window(QFrame):
         # config
         self.setWindowTitle("School manager")
 
-        self.layout = QVBoxLayout(self)
+        self.layout: QVBoxLayout = QVBoxLayout(self)
 
         self.layout.addWidget(MainMenu())
 
