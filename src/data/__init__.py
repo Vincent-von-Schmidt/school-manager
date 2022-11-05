@@ -2,12 +2,12 @@ import json
 import yaml
 
 with open("src/data/config/config.yaml", "r") as file:
-    config = yaml.safe_load(file.read())
+    config: dict = yaml.safe_load(file.read())
 
 with open("src/data/lang/{}.json".format(config["language"]), "r") as file:
-    lang = json.loads(file.read())
+    lang: dict = json.loads(file.read())
 
-debug = config["general"]["debug"]
+debug: bool = config["general"]["debug"]
 
 def translate(text: str) -> str:
     """
@@ -17,10 +17,14 @@ def translate(text: str) -> str:
     The program will continue with the given text. 
     """
     try:
-        translation = lang[text.lower()]
+        if debug:
+            print(f"translate text: {text}")
+
+        translation: str = lang[text.lower()]
     
     except KeyError as error:
-        translation = text
+        translation: str = text
+
         if debug:
             print(f"translation error -> {error}")
 
