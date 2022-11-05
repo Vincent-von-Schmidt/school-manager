@@ -22,8 +22,8 @@ class ListTabs(QWidget):
 
         self.vLayout = QVBoxLayout(self)
 
-        self.vLayout.addWidget(list := QListWidget())
-        self.list = list
+        self.list = QListWidget()
+        self.vLayout.addWidget(self.list)
 
         self.hLayout.addLayout(self.vLayout, 0)
         self.hLayout.addWidget(self.stack, 1)
@@ -59,5 +59,3 @@ class ListTabs(QWidget):
         self.stack.addWidget(scroll_area)
         self.counter += 1
 
-    def addWidget_left(self, widget: QWidget) -> None:
-        self.vLayout.addWidget(widget)
