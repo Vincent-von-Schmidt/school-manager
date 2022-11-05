@@ -15,14 +15,14 @@ class ListTabs(QWidget):
     def __init__(self) -> None:
         super().__init__()
 
-        self.counter = 0
+        self.counter: int = 0
 
-        self.hLayout = QHBoxLayout(self)
-        self.stack = QStackedWidget(self)
+        self.hLayout: QHBoxLayout = QHBoxLayout(self)
+        self.stack: QStackedWidget = QStackedWidget(self)
 
-        self.vLayout = QVBoxLayout(self)
+        self.vLayout: QVBoxLayout = QVBoxLayout(self)
 
-        self.list = QListWidget()
+        self.list: QListWidget = QListWidget()
         self.vLayout.addWidget(self.list)
 
         self.hLayout.addLayout(self.vLayout, 0)
@@ -33,20 +33,21 @@ class ListTabs(QWidget):
         self.setLayout(self.hLayout)
 
     def addWidget(self, text: str, widget: QWidget, icon: QIcon = None) -> None:
-        self.list.insertItem(self.counter, item := QListWidgetItem(text))
+        item: QListWidgetItem = QListWidgetItem(text)
+        self.list.insertItem(self.counter, item)
 
         # icon check
         if icon is not None:
             item.setIcon(icon)
 
         # scroll area config
-        scroll_area = QScrollArea(self)
+        scroll_area: QScrollArea = QScrollArea(self)
         scroll_area.setVerticalScrollBar(QScrollBar(self))
         scroll_area.setWidgetResizable(True)
 
         # frame + layout creation
-        content = QFrame(self)
-        layout = QVBoxLayout(content)
+        content: QFrame = QFrame(self)
+        layout: QVBoxLayout = QVBoxLayout(content)
 
         # widget append
         layout.addWidget(widget)
