@@ -11,11 +11,15 @@ class Settings(QFrame):
     def __init__(self) -> None:
         super().__init__()
         
-        self.layout = QVBoxLayout(self)
-        self.stack = QStackedWidget(self)
+        self.layout: QVBoxLayout = QVBoxLayout(self)
+        self.stack: QStackedWidget = QStackedWidget(self)
 
-        self.stack.addWidget(menu := SettingsMenu())
-        self.stack.addWidget(general := General())
+        menu: SettingsMenu = SettingsMenu()
+        self.stack.addWidget(menu)
+
+        general: General = General()
+        self.stack.addWidget(general)
+
         self.stack.addWidget(QFrame())
 
         menu.button_general.clicked.connect(lambda: self.stack.setCurrentIndex(1))
