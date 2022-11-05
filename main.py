@@ -4,11 +4,11 @@ import sys
 import src.data as data
 
 if __name__ == "__main__":
-    app = QApplication([sys.argv])
-    window = Window()
+    app: QApplication = QApplication([sys.argv])
+    window: Window = Window()
     
     with open("src/app/style/dark.css", "r") as file:
-        style = file.read()
+        style: str = file.read()
     
     if data.debug:
         with open("src/app/style/debug.css", "r") as file:
