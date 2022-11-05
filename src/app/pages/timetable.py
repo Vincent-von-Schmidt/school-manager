@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import (
 import psycopg2
 import mysql.connector
 import src.data as data
-from src.widgets.div import Div
+from src.widgets.div.div import Div
 from tabulate import tabulate
 
 
@@ -12,14 +12,14 @@ class Timetable(QFrame):
     def __init__(self) -> None:
         super().__init__()
 
-        self.layout = QVBoxLayout(self)
+        self.layout: QVBoxLayout = QVBoxLayout(self)
 
         try: 
             # database system
             match data.config["timetable"]["system"]: 
                 case "postgresql":
                     try:
-                        self.connection = psycopg2.connect(
+                        self.connection: psycopg2.extensions.connection = psycopg2.connect(
                             host=data.config["timetable"]["host"],
                             port=data.config["timetable"]["port"],
                             database=data.config["timetable"]["database"],
@@ -32,6 +32,7 @@ class Timetable(QFrame):
 
                 case "mysql":
                     try:
+                        # missing type
                         self.connection = mysql.connector.connect(
                             host=data.config["timetable"]["host"],
                             port=data.config["timetable"]["port"],
@@ -46,7 +47,8 @@ class Timetable(QFrame):
                 case _:
                     raise ConnectionError("No database system specified!")
 
-            self.cursor = self.connection.cursor()
+            # missing type
+            self.cursor: psycopg2.extensions.cursor = self.connection.cursor()
 
             # sql querry for the timetable
             self.cursor.execute("""
@@ -116,11 +118,11 @@ class Timetable(QFrame):
 
             # rows -> 10
             # columns -> 6
-            self.table = QTableWidget(10, 6, self)
+            self.table: QTableWidget = QTableWidget(10, 6, self)
 
             # set headers
             # cordinates -> 0 -> y, count -> x
-            count = 0
+            count: int = 0
             for x in self.cursor.description:
                 self.table.setItem(0, count, QTableWidgetItem(data.translate(str(x[0]))))
                 count += 1
@@ -132,7 +134,7 @@ class Timetable(QFrame):
 
                     # NULL check
                     if content == None:
-                        content = ""
+                        content: str = ""
                     
                     # fetch_index + 1 -> 0 = header
                     self.table.setItem(
@@ -152,10 +154,11 @@ class Timetable(QFrame):
 
             self.layout.addWidget(self.table)
 
-            self.layout.addWidget(info_screen := Div())
+            info_screen: Div = Div()
+            self.layout.addWidget(info_screen)
 
             # infoscreen
-            self.content = QLabel(data.translate("info"))
+            self.content: QLabel = QLabel(data.translate("info"))
             info_screen.addWidget(self.content)
 
             # infoscreen update
@@ -172,8 +175,12 @@ class Timetable(QFrame):
         Update the content of the infoscreen, 
         depending on the selected table cell. 
         """
-        item = self.table.item(self.table.currentRow(), self.table.currentColumn()).text()
-        day = self.table.item(0, self.table.currentColumn()).text()
+        item: str = self.table.item(
+                self.table.currentRow(),
+                self.table.currentColumn()
+        ).text()
+
+        day: str = self.table.item(0, self.table.currentColumn()).text()
         
         # NULL check
         if item == "":
@@ -181,6 +188,7 @@ class Timetable(QFrame):
             return
 
         # connect to the database server 
+        # missing type
         self.cursor = self.connection.cursor()
 
         self.cursor.execute(f"""
@@ -203,7 +211,7 @@ class Timetable(QFrame):
 
         # add informations, in form of an table, to the infoscreen
         self.content.setText(str(tabulate(
-            [data.translate(x) for x in self.cursor.fetchall()],
+            [data.translate(x) for x in list(self.cursor.fetchall()[0])], 
             headers=[data.translate(x[0]) for x in self.cursor.description],
             tablefmt="presto"
         )))
