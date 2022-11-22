@@ -5,8 +5,8 @@ from PyQt6.QtWidgets import (
     QLabel,
     QPushButton
 )
-from src.widgets.div.div import Div
-from src.data import translate, config
+from widgets.div.div import Div
+from data import translate, config
 
 
 class General(QFrame):

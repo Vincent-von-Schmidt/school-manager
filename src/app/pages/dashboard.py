@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtGui import QIcon, QPixmap
 from PyQt6.QtCore import Qt
-from src.widgets.div.div import Div
+from widgets.div.div import Div
 
 
 class Dashboard(QFrame):

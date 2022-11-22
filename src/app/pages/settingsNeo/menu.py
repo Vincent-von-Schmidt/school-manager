@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import (
     QPushButton,
     QFrame
 )
-from src.data import translate
+from data import translate
 
 
 class SettingsMenu(QFrame):
@@ -16,7 +16,7 @@ class SettingsMenu(QFrame):
         self.layout.addWidget(self.button_general)
         self.button_general.setObjectName("div")
 
-        self.button_design: QPushButton = QPushButton(translate("Design"))
+        self.button_design: QPushButton = QPushButton(translate("test page"))
         self.layout.addWidget(self.button_design)
         self.button_design.setObjectName("div")
 

@@ -11,6 +11,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtGui import QIcon
 
+
 class ListTabs(QWidget):
     def __init__(self) -> None:
         super().__init__()

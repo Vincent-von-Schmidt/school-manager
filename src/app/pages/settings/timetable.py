@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import (
     QLabel, 
     QFrame 
 )
-from src.widgets.div import Div
+from src.widgets.div.div import Div
 from src.data import translate
 
 

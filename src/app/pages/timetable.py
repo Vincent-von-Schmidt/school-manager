@@ -3,8 +3,8 @@ from PyQt6.QtWidgets import (
 )
 import psycopg2
 import mysql.connector
-import src.data as data
-from src.widgets.div.div import Div
+import data as data
+from widgets.div.div import Div
 from tabulate import tabulate
 
 

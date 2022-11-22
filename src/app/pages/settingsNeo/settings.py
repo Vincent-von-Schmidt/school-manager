@@ -3,8 +3,9 @@ from PyQt6.QtWidgets import (
     QFrame,
     QStackedWidget
 )
-from src.app.pages.settingsNeo.menu import SettingsMenu
-from src.app.pages.settingsNeo.pages.general import General
+from app.pages.settingsNeo.menu import SettingsMenu
+from app.pages.settingsNeo.pages.general import General
+from widgets.page import Page
 
 
 class Settings(QFrame):
@@ -20,7 +21,8 @@ class Settings(QFrame):
         general: General = General()
         self.stack.addWidget(general)
 
-        self.stack.addWidget(QFrame())
+        test_page: Page = Page("test page")
+        self.stack.addWidget(test_page)
 
         menu.button_general.clicked.connect(lambda: self.stack.setCurrentIndex(1))
         menu.button_design.clicked.connect(lambda: self.stack.setCurrentIndex(2))

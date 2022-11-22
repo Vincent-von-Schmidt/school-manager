@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import (
     QStackedWidget, QVBoxLayout, QFrame
 )
-from src.app.pages.main_menu import MainMenu
+from app.pages.main_menu import MainMenu
 
 
 class Window(QFrame):

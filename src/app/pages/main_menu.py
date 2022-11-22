@@ -1,10 +1,10 @@
 from PyQt6.QtWidgets import QFrame, QVBoxLayout
 from PyQt6.QtGui import QIcon
-from src.widgets.list_tabs import ListTabs
-from src.app.pages.timetable import Timetable
-from src.app.pages.settingsNeo.settings import Settings as SettingsNeo
-from src.app.pages.dashboard import Dashboard
-from src.data import translate
+from widgets.list_tabs import ListTabs
+from app.pages.timetable import Timetable
+from app.pages.settingsNeo.settings import Settings as SettingsNeo
+from app.pages.dashboard import Dashboard
+from data import translate
 
 
 class MainMenu(QFrame):
